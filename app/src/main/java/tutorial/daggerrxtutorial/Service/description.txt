@@ -1,5 +1,0 @@
-Include class extends from
-    - extends Service
-    - extends BroadcastReceiver
-    - extends FirebaseMessagingService
-    - extends FirebaseInstanceIdService (Just example)
