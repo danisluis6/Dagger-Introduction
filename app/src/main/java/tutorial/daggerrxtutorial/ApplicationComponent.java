@@ -1,4 +1,4 @@
-package tutorial.daggerrxtutorial.utils;
+package tutorial.daggerrxtutorial;
 
 import javax.inject.Singleton;
 

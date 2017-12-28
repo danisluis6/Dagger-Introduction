@@ -1,6 +1,7 @@
 package tutorial.daggerrxtutorial.utils;
 
 import android.app.Application;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -18,7 +19,6 @@ public class AnalyticsManager {
 
     @Inject
     public AnalyticsManager() {
-
     }
 
     public void initAnalyticsManager(Application app) {

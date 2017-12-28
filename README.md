@@ -69,5 +69,9 @@
                 return mHeavyLibraryWrapper;
             }
         }
-        
-     >> template_2   
+        >> template_2
+         
+> **Level 3: We need to go or approach Build Activity and apply Rx(Dagger already applied).**
+  - Create folder ui and contain MainActivity.java
+  - Create BaseActivity.java
+  - 

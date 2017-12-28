@@ -7,8 +7,8 @@ import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 import timber.log.Timber;
 import tutorial.daggerrxtutorial.ApplicationModule;
 import tutorial.daggerrxtutorial.BuildConfig;
-import tutorial.daggerrxtutorial.utils.ApplicationComponent;
-import tutorial.daggerrxtutorial.utils.DaggerApplicationComponent;
+import tutorial.daggerrxtutorial.ApplicationComponent;
+import tutorial.daggerrxtutorial.DaggerApplicationComponent;
 
 /**
  * Created by lorence on 28/12/2017.
