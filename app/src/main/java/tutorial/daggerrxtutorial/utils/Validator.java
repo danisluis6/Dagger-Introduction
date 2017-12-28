@@ -2,6 +2,8 @@ package tutorial.daggerrxtutorial.utils;
 
 import android.text.TextUtils;
 
+import javax.inject.Inject;
+
 /**
  * Created by lorence on 28/12/2017.
  *
@@ -10,6 +12,8 @@ import android.text.TextUtils;
  */
 
 public class Validator {
+
+    @Inject
     public Validator() {
     }
 

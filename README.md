@@ -19,7 +19,55 @@
              heavyExternalLibrary.init();
              return heavyExternalLibrary;
          }
+       
+     >> template_1    
          
  - We use @Inject(Constructor)
  
-    
+        @Module
+        public class ApplicationModule {
+            @Inject AnalyticsManager mAnalyticsManager;
+            @Inject Validator mValidator;
+            @Inject HeavyExternalLibrary mHeavyExternalLibrary;
+            @Inject HeavyLibraryWrapper mHeavyLibraryWrapper;
+        
+            private Application application;
+        
+            public ApplicationModule(Application application) {
+                this.application = application;
+            }
+        
+            @Provides
+            @Singleton
+            Application provideApplication() {
+                return application;
+            }
+        
+            @Provides
+            @Singleton
+            AnalyticsManager provideAnalyticsManager() {
+                mAnalyticsManager.initAnalyticsManager(application);
+                return mAnalyticsManager;
+            }
+        
+            @Provides
+            @Singleton
+            Validator provideValidator() {
+                return mValidator;
+            }
+        
+            @Provides
+            @Singleton
+            HeavyExternalLibrary provideHeavyExternalLibrary() {
+                mHeavyExternalLibrary.init();
+                return mHeavyExternalLibrary;
+            }
+        
+            @Provides
+            @Singleton
+            HeavyLibraryWrapper provideLibraryWrapper() {
+                return mHeavyLibraryWrapper;
+            }
+        }
+        
+     >> template_2   

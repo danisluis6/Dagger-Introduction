@@ -12,6 +12,7 @@ import javax.inject.Inject;
 public class HeavyExternalLibrary {
     private boolean initialized = false;
 
+    @Inject
     public HeavyExternalLibrary() {
     }
 

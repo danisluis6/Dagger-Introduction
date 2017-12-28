@@ -23,6 +23,7 @@ public class HeavyLibraryWrapper {
 
     ConnectableObservable<HeavyExternalLibrary> initObservable;
 
+    @Inject
     public HeavyLibraryWrapper() {
         initObservable = Observable.create(new Observable.OnSubscribe<HeavyExternalLibrary>() {
             @Override

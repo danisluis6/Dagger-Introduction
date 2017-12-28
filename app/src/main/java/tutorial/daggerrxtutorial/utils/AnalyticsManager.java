@@ -2,6 +2,8 @@ package tutorial.daggerrxtutorial.utils;
 
 import android.app.Application;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 /**
@@ -14,11 +16,16 @@ import timber.log.Timber;
 public class AnalyticsManager {
     private Application app;
 
-    public AnalyticsManager(Application app) {
+    @Inject
+    public AnalyticsManager() {
+
+    }
+
+    public void initAnalyticsManager(Application app) {
         this.app = app;
     }
 
-    public void logScreenView(String screenName) {
+    void logScreenView(String screenName) {
         Timber.d("Logged screen name: " + screenName);
     }
 }
