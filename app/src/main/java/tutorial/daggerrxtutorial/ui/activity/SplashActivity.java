@@ -23,8 +23,6 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.edtUserGit)
     EditText edtUserGit;
 
-
-
     /**
      * In this case, we just attach Module, we can't use any method with this module. Because, we will get
      * Null Pointer Exception. It's a big problem in here.
@@ -46,6 +44,5 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void setupActivityComponent() {
-        Log.i("TAG", "Hello World");
     }
 }
