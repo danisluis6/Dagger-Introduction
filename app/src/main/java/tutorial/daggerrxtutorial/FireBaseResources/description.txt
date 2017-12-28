@@ -1,2 +1,0 @@
-* Including somethings:
-    - Class invokes with Firebase google.

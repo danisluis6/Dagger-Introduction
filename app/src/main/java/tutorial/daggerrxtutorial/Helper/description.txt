@@ -1,9 +1,0 @@
-* Include some class
-    - Application (whole app)
-    - Constants
-    - FontOverride
-    - AsyncTask
-    - Service (Run background)
-    - Class Manager => RetrofitManager, FragmentManager, GsonManager
-    - Helper (instead of utilities class): So many functions if you use it in many places.
-*
