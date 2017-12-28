@@ -1,0 +1,1 @@
+* Include class or interface involves NotificationResource

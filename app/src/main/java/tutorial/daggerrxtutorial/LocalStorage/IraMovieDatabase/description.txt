@@ -1,0 +1,2 @@
+In here, we have more object.
+=> We need to have interface to implement. And we will manage code and find method easily.

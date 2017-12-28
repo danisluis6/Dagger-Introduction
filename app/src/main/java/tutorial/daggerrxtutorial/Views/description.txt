@@ -1,0 +1,2 @@
+Include MainView and Interface View
+=> Structure folder is the same with models and presenters

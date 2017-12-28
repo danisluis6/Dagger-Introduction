@@ -1,0 +1,6 @@
+There are several some class, interface that put in here such as:
+- Class get from Library
+- Interface to use interact with these classes
+- ViewHolder (Using Adapter, we can put it in here for coding)
+- Animation (Using for open or close view/widget)
+- Even Utils class we can put it in here.
