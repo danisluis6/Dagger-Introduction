@@ -1,5 +1,7 @@
 package tutorial.daggerrxtutorial;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;

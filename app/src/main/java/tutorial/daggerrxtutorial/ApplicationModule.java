@@ -2,6 +2,7 @@ package tutorial.daggerrxtutorial;
 
 import android.app.Application;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;

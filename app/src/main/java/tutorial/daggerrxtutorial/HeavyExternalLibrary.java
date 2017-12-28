@@ -1,5 +1,7 @@
 package tutorial.daggerrxtutorial;
 
+import javax.inject.Inject;
+
 /**
  * Created by lorence on 28/12/2017.
  *
