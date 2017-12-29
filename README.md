@@ -174,6 +174,19 @@
 > **Step by step**
    - Try to @Inject(AnalyticsManager)
     
-   
+> **WE ARE STANDING IN SPLASHACTIVITYPRESENTER**
+
+   - @Inject protected SplashActivity splashActivity;
+   - We have two solutions in here:
+    
+* Solution 1: We will create Constructor of this class and put annotation @Inject
+    @Inject
+    public SplashActivityComponent() {}
+    
+* Solution 2: We will provide Object(SplashActivityComponent) from Module. And we just 
+call it from Module.
+   - When we provide, we wont' have parameter. Otherwise, we will have parameters. So we 
+   will create functions and get parameters from Modules.
+   - Implement solution 2
    
    

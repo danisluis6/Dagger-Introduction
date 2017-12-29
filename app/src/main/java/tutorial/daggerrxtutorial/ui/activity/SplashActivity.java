@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import tutorial.daggerrxtutorial.Application.Application;
 import tutorial.daggerrxtutorial.R;
 import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
+import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
 import tutorial.daggerrxtutorial.utils.AnalyticsManager;
 
 /**
@@ -34,7 +35,9 @@ public class SplashActivity extends BaseActivity {
      * DONE, we will start with this SplashScreen
      */
     @Inject
-    AnalyticsManager mAnalyticsManager;
+    protected AnalyticsManager mAnalyticsManager;
+    @Inject
+    protected SplashActivityPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
