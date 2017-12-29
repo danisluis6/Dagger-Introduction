@@ -188,5 +188,75 @@ call it from Module.
    - When we provide, we wont' have parameter. Otherwise, we will have parameters. So we 
    will create functions and get parameters from Modules.
    - Implement solution 2
+
+>> **Working with data**
+   - We have User in this system. So we need to scope of using this User, and declare some methods involve  
+   with User, API, ResponseObject to get from server.
+   - Build structure folders.
+
+>**BUILDING SCOPE USER**
+   - Done
+   
+>**BUILDING SCOPE USER MODULE**
+    - Think about provides these things for object outside.
+    - Come back to CakeModule. We need to compare between CakeModule and UserModule. What is the difference or the same 
+    things in here.
+    
+    @Module
+    public class CakeModule {
+    
+        private MainView mView;
+    
+        public CakeModule(MainView view) {
+            mView = view;
+            Log.i("TAG", "CakeModule -> CakeModule(Constructor)");
+        }
+    
+        @PerActivity
+        @Provides
+        CakeApiService provideApiService(Retrofit retrofit) {
+            Log.i("TAG", "CakeModule -> CakeApiService");
+            return retrofit.create(CakeApiService.class);
+        }
+    
+        @PerActivity
+        @Provides
+        MainView provideView() {
+            Log.i("TAG", "CakeModule -> MainView");
+            return mView;
+        }
+    
+    }
+    
+> Explain about CakeModule. We need provides Retrofit in here, But we use @Inject(Retrofit). We can't, Retrofit will get from
+ApplicationComponent.
+
+    @Module
+    public class UserModule {
+    
+        private User user;
+    
+        public UserModule(User user) {
+            this.user = user;
+        }
+    
+        @Provides
+        @UserScope
+        User provideUser() {
+            return user;
+        }
+    
+        @Provides
+        @UserScope
+        RepositoriesManager provideRepositoriesManager(User user, GithubApiService githubApiService) {
+            return new RepositoriesManager(user, githubApiService);
+        }
+    }
+    
+> Explain about UserModule. We still need to have ApiService.
+   - Build User
+   
+   - Build UserModule
    
    
+    

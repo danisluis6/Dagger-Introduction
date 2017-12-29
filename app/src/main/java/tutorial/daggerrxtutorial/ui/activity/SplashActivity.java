@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tutorial.daggerrxtutorial.Application.Application;
+import tutorial.daggerrxtutorial.application.Application;
 import tutorial.daggerrxtutorial.R;
 import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;

@@ -1,4 +1,4 @@
-package tutorial.daggerrxtutorial.Application;
+package tutorial.daggerrxtutorial.application;
 
 import android.content.Context;
 
