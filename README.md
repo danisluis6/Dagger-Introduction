@@ -333,3 +333,6 @@ ApplicationComponent.
                     return new UserManager(githubApiService);
                 }
             }
+            
+   - Done Initialize UserManager, GithubApiService, GithubApiModule, Activate GithubApiModule, UserScope, UserResponse
+            
