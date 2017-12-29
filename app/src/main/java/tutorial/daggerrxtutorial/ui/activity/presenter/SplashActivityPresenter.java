@@ -36,7 +36,10 @@ public class SplashActivityPresenter {
      * @param mValidator
      * @param mUserManager
      * @param mHeavyLibraryWrapper
+     *
      */
+    public String mUserName;
+
     private SplashActivity mSplashActivity;
     private Validator mValidator;
     private HeavyLibraryWrapper mHeavyLibraryWrapper;

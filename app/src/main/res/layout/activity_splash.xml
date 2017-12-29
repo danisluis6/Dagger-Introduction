@@ -16,6 +16,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:background="@drawable/shape_editext"
+        android:imeOptions="actionDone"
         android:inputType="text"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"

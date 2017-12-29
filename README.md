@@ -335,4 +335,6 @@ ApplicationComponent.
             }
             
    - Done Initialize UserManager, GithubApiService, GithubApiModule, Activate GithubApiModule, UserScope, UserResponse
-            
+           
+> We will get data from Api
+>> https://github.com/JakeWharton/RxBinding REBINDING
