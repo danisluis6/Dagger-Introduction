@@ -255,8 +255,81 @@ ApplicationComponent.
     
 > Explain about UserModule. We still need to have ApiService.
    - Build User
-   
    - Build UserModule
    
-   
-    
+> We need to analyze how to get data from API with Dagger 2 + Rx Android
+       
+     - Case 1: CakePresenter
+     
+        - CakePresenter => getObject() => CakeApiService(CakeModule) => Retrofit(ApplicationModule)
+        - Create Object and using Observable to get data from API
+        - Observable<Object> => Thread is running => Observer(Object) 
+        
+     - Case 2: SplashScreenActivity
+        - Create GitHubApisService as resource resource link URL to access Api
+        - Create GitHubApiModule as resource to provides method utils to access database.
+        - Create UserResponse(Object response to get data from Serve API)
+        - After done provides these method to prepare get DATA from API
+        
+> We will analyze in here
+
+   - Notice SplashScreenActivity, GithubApiService, UserManager
+     -  
+     - All object is created inside 
+     
+   - Using constructor for UserManager, GithubApiService(no constructor but this is a operation)
+     - 
+     - How to activate new module(GithubApiModule) and using this class (UserManager -> Make Constructor is initialize)
+     
+   - Explain: 
+     - 
+     - To activate new module(GithubApiService) before activating new module(UserModule)
+     
+   - Activate new module(GithubApiService)
+     - 
+     - Using ApplicationComponent (no method in here will run)
+     
+   - Activate new class(UserManager)
+     -
+     - There are two purpose: 
+        - Use these methods inside class.
+        - Harmonic class become @Inject
+     - Activate (Module => new Object) => Initialize Object outside and provide some objects that involes with these
+     method inside class
+     
+        
+         public class UserManager {
+             private GithubApiService githubApiService;
+             public UserManager(GithubApiService githubApiService) {
+                 this.githubApiService = githubApiService;
+             }
+         
+             public Observable<User> getUser(String username) {
+                 return githubApiService.getUser(username)
+                         .map(new Func1<UserResponse, User>() {
+                             @Override
+                             public User call(UserResponse userResponse) {
+                                 User user = new User();
+                                 user.login = userResponse.login;
+                                 user.id = userResponse.id;
+                                 user.url = userResponse.url;
+                                 user.email = userResponse.email;
+                                 return user;
+                             }
+                         })
+                         .subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread());
+             }
+         }
+         
+   - GithubApiService to support for method getUser(that provided by UserManager)
+   - Are able to use UserManager is null?
+   - No => UserManager is call => Module => new Object() => Not null pointer
+   - Actiavate(no need just harmonic argument to use or @Inject if you want(@Provides in GithubApiModule)
+     
+            @Provides
+                @Singleton
+                public UserManager provideUserManager(GithubApiService githubApiService) {
+                    return new UserManager(githubApiService);
+                }
+            }

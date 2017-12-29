@@ -3,6 +3,7 @@ package tutorial.daggerrxtutorial;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import tutorial.daggerrxtutorial.data.api.GithubApiModule;
 import tutorial.daggerrxtutorial.ui.activity.component.SplashActivityComponent;
 import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 
@@ -15,7 +16,8 @@ import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 
 @Singleton
 @Component(modules = {
-        ApplicationModule.class
+        ApplicationModule.class,
+        GithubApiModule.class
     }
 )
 public interface ApplicationComponent {

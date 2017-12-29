@@ -1,7 +1,5 @@
 package tutorial.daggerrxtutorial.ui.activity.module;
 
-import android.os.UserManager;
-
 import dagger.Module;
 import dagger.Provides;
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
@@ -37,4 +35,16 @@ public class SplashActivityModule {
     SplashActivityPresenter provideSplashActivityPresenter(Validator validator, HeavyLibraryWrapper heavyLibraryWrapper) {
         return new SplashActivityPresenter(splashActivity, validator, heavyLibraryWrapper);
     }
+
+    /** Another way, if you don't want to push parameters. You can use @Inject in here
+     * Push parameters in here if you want to use it parameters outside
+     * For example: You want to use Validator or HeavyLibraryWrapper.
+     *
+     *
+     * @Inject Validator mValidator;
+     * @Inject HeavyLibraryWrapper  mLibraryWrapper;
+     * Inside module new Object() or get it from other Module or Component (Using @Provides)
+     * +> Go to GithubApiModule
+     * */
+
 }
