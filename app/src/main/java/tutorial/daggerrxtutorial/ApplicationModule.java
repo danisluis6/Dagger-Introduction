@@ -20,11 +20,6 @@ import tutorial.daggerrxtutorial.utils.Validator;
 @Module
 public class ApplicationModule {
 
-    @Inject AnalyticsManager mAnalyticsManager;
-    @Inject Validator mValidator;
-    @Inject HeavyExternalLibrary mHeavyExternalLibrary;
-    @Inject HeavyLibraryWrapper mHeavyLibraryWrapper;
-
     private Application application;
 
     public ApplicationModule(Application application) {
@@ -33,34 +28,34 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Application provideApplication() {
+    public Application provideApplication() {
         return application;
     }
 
     @Provides
     @Singleton
     AnalyticsManager provideAnalyticsManager() {
-        mAnalyticsManager.initAnalyticsManager(application);
-        return mAnalyticsManager;
+        return new AnalyticsManager(application);
     }
 
     @Provides
     @Singleton
     Validator provideValidator() {
-        return mValidator;
+        return new Validator();
     }
 
     @Provides
     @Singleton
     HeavyExternalLibrary provideHeavyExternalLibrary() {
-        mHeavyExternalLibrary.init();
-        return mHeavyExternalLibrary;
+        HeavyExternalLibrary heavyExternalLibrary = new HeavyExternalLibrary();
+        heavyExternalLibrary.init();
+        return heavyExternalLibrary;
     }
 
     @Provides
     @Singleton
     HeavyLibraryWrapper provideLibraryWrapper() {
-        return mHeavyLibraryWrapper;
+        return new HeavyLibraryWrapper();
     }
 
 }

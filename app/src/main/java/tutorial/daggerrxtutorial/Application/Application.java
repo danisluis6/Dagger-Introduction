@@ -22,7 +22,7 @@ public class Application extends android.app.Application {
 
     private ApplicationComponent applicationComponent;
 
-    public Application get(Context context) {
+    public static Application get(Context context) {
         return (Application)context.getApplicationContext();
     }
 
@@ -40,5 +40,9 @@ public class Application extends android.app.Application {
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .build();
+    }
+
+    public ApplicationComponent getAppComponent() {
+        return applicationComponent;
     }
 }

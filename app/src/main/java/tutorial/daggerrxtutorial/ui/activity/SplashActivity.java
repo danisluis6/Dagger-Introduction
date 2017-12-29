@@ -1,14 +1,15 @@
 package tutorial.daggerrxtutorial.ui.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tutorial.daggerrxtutorial.Application.Application;
 import tutorial.daggerrxtutorial.R;
+import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 import tutorial.daggerrxtutorial.utils.AnalyticsManager;
 
 /**
@@ -40,9 +41,16 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+        mAnalyticsManager.logScreenView(getClass().getName());
     }
 
     @Override
     protected void setupActivityComponent() {
+        Application.get(this)
+                .getAppComponent()
+                .plus(new SplashActivityModule(this))
+                .inject(this);
+
     }
 }
