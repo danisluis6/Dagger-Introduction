@@ -7,7 +7,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.observables.ConnectableObservable;
 import rx.schedulers.Schedulers;
-import tutorial.daggerrxtutorial.utils.SimpleObserver;
+import tutorial.daggerrxtutorial.utilities.SimpleObserver;
 
 /**
  * Created by lorence on 28/12/2017.

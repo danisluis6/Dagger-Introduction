@@ -1,4 +1,4 @@
-package tutorial.daggerrxtutorial.utils;
+package tutorial.daggerrxtutorial.utilities;
 
 import android.text.TextUtils;
 

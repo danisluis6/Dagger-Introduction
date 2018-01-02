@@ -3,13 +3,12 @@ package tutorial.daggerrxtutorial;
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import tutorial.daggerrxtutorial.utils.AnalyticsManager;
-import tutorial.daggerrxtutorial.utils.Validator;
+import tutorial.daggerrxtutorial.utilities.AnalyticsManager;
+import tutorial.daggerrxtutorial.utilities.Validator;
 
 /**
  * Created by lorence on 28/12/2017.

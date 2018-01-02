@@ -7,7 +7,7 @@ import tutorial.daggerrxtutorial.data.api.UserManager;
 import tutorial.daggerrxtutorial.ui.activity.ActivityScope;
 import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
 import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
-import tutorial.daggerrxtutorial.utils.Validator;
+import tutorial.daggerrxtutorial.utilities.Validator;
 
 /**
  * Created by lorence on 28/12/2017.

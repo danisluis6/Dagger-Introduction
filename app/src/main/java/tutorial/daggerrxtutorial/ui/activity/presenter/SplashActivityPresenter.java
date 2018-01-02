@@ -1,11 +1,13 @@
 package tutorial.daggerrxtutorial.ui.activity.presenter;
 
+import android.util.Log;
+
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
 import tutorial.daggerrxtutorial.data.api.UserManager;
 import tutorial.daggerrxtutorial.data.model.User;
 import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
-import tutorial.daggerrxtutorial.utils.SimpleObserver;
-import tutorial.daggerrxtutorial.utils.Validator;
+import tutorial.daggerrxtutorial.utilities.SimpleObserver;
+import tutorial.daggerrxtutorial.utilities.Validator;
 
 /**
  * Created by lorence on 29/12/2017.
@@ -61,23 +63,24 @@ public class SplashActivityPresenter {
     }
 
     public void onShowRepositoriesClick() {
-//        if (mValidator.validUsername(mUserName)) {
-//            mSplashActivity.showLoading(true);
-//            mUserManager.getUser(mUserName).subscribe(new SimpleObserver<User>() {
-//                @Override
-//                public void onNext(User user) {
-//                    mSplashActivity.showLoading(false);
-//                    mSplashActivity.showRepositoriesListForUser(user);
-//                }
-//
-//                @Override
-//                public void onError(Throwable e) {
-//                    mSplashActivity.showLoading(false);
-//                    mSplashActivity.showValidationError();
-//                }
-//            });
-//        } else {
-//            mSplashActivity.showValidationError();
-//        }
+        Log.i("mUserName", mUserName);
+        if (mValidator.validUsername(mUserName)) {
+            mSplashActivity.showLoading(true);
+            mUserManager.getUser(mUserName).subscribe(new SimpleObserver<User>() {
+                @Override
+                public void onNext(User user) {
+                    mSplashActivity.showLoading(false);
+                    mSplashActivity.showRepositoriesListForUser(user);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    mSplashActivity.showLoading(false);
+                    mSplashActivity.showValidationError();
+                }
+            });
+        } else {
+            mSplashActivity.showValidationError();
+        }
     }
 }

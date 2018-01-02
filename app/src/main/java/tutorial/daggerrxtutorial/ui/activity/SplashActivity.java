@@ -2,19 +2,13 @@ package tutorial.daggerrxtutorial.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -24,17 +18,18 @@ import rx.Subscription;
 import rx.functions.Action1;
 import tutorial.daggerrxtutorial.R;
 import tutorial.daggerrxtutorial.application.Application;
+import tutorial.daggerrxtutorial.data.model.User;
 import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
-import tutorial.daggerrxtutorial.utils.AnalyticsManager;
+import tutorial.daggerrxtutorial.utilities.AnalyticsManager;
+import tutorial.daggerrxtutorial.utilities.Helper;
 
 /**
  * Created by lorence on 28/12/2017.
  *
  * @version master
- * @since 12/28/2017
- *
  * @link(https://www.youtube.com/watch?v=vfjgQabgjOg&t=685s)
+ * @since 12/28/2017
  */
 
 public class SplashActivity extends BaseActivity {
@@ -45,13 +40,11 @@ public class SplashActivity extends BaseActivity {
     /**
      * In this case, we just attach Module, we can't use any method with this module. Because, we will get
      * Null Pointer Exception. It's a big problem in here.
-     *
+     * <p>
      * In this cake, we will run resolve Null Pointer Exception. Be sure, we will call DaggerSplashActivityComponent.
      * => We will definite SplashActivityComponent, SplashModuleComponent
-     *
+     * <p>
      * DONE, we will start with this SplashScreen
-     *
-     *
      */
     @Inject
     protected AnalyticsManager mAnalyticsManager;
@@ -69,6 +62,7 @@ public class SplashActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         mAnalyticsManager.logScreenView(getClass().getName());
+        edtUserGit.setText(Helper.Constant.EMPTY_STRING);
 
         edtUserGit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -78,38 +72,13 @@ public class SplashActivity extends BaseActivity {
                         @Override
                         public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
                             mPresenter.mUserName = textViewTextChangeEvent.text().toString();
-                            edtUserGit.setError(null);
+                            mPresenter.onShowRepositoriesClick();
                         }
                     });
                 }
                 return false;
             }
         });
-
-        edtUserGit.addTextChangedListener(
-                new TextWatcher() {
-                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
-                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-                    private Timer timer=new Timer();
-                    private final long DELAY = 500; // milliseconds
-
-                    @Override
-                    public void afterTextChanged(final Editable s) {
-                        timer.cancel();
-                        timer = new Timer();
-                        timer.schedule(
-                                new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(mContext, "Search", Toast.LENGTH_SHORT).show();
-                                    }
-                                },
-                                DELAY
-                        );
-                    }
-                }
-        );
     }
 
     @Override
@@ -127,22 +96,20 @@ public class SplashActivity extends BaseActivity {
         textChangeSubscription.unsubscribe();
     }
 
-//    @OnClick(R.id.btnShowRepositories)
-//    public void onShowRepositoriesClick() {
-//        mPresenter.onShowRepositoriesClick();
-//    }
-//
-//    public void showRepositoriesListForUser(User user) {
-////        Application.get(this).createUserComponent(user);
-////        startActivity(new Intent(this, RepositoriesListActivity.class));
-//    }
-//
-//    public void showValidationError() {
-//        edtUserGit.setError("Validation error");
-//    }
-//
-//    public void showLoading(boolean loading) {
-//        btnShowRepositories.setVisibility(loading ? View.GONE : View.VISIBLE);
-//        pbLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
-//    }
+    public void showRepositoriesListForUser(User user) {
+//        Application.get(this).createUserComponent(user);
+//        startActivity(new Intent(this, RepositoriesListActivity.class));
+    }
+
+    public void showValidationError() {
+        edtUserGit.setError("User not found");
+    }
+
+    public void showLoading(boolean loading) {
+        if (loading) {
+            showDialog("Loading user...");
+        } else {
+            hideDialog();
+        }
+    }
 }
