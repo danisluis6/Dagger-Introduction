@@ -2,10 +2,10 @@ package tutorial.daggerrxtutorial.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
@@ -64,21 +64,29 @@ public class SplashActivity extends BaseActivity {
         mAnalyticsManager.logScreenView(getClass().getName());
         edtUserGit.setText(Helper.Constant.EMPTY_STRING);
 
-        edtUserGit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    textChangeSubscription = RxTextView.textChangeEvents(edtUserGit).subscribe(new Action1<TextViewTextChangeEvent>() {
-                        @Override
-                        public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
-                            mPresenter.mUserName = textViewTextChangeEvent.text().toString();
-                            mPresenter.onShowRepositoriesClick();
-                        }
-                    });
+        edtUserGit.addTextChangedListener(
+                new TextWatcher() {
+                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                    @Override
+                    public void afterTextChanged(final Editable s) {
+                        final long DELAY = 500; // milliseconds
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                textChangeSubscription = RxTextView.textChangeEvents(edtUserGit).subscribe(new Action1<TextViewTextChangeEvent>() {
+                                    @Override
+                                    public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
+                                        mPresenter.mUserName = textViewTextChangeEvent.text().toString();
+                                    }
+                                });
+                                mPresenter.onShowRepositoriesClick();
+                            }
+                        }, DELAY);
+                    }
                 }
-                return false;
-            }
-        });
+        );
     }
 
     @Override
@@ -102,7 +110,9 @@ public class SplashActivity extends BaseActivity {
     }
 
     public void showValidationError() {
-        edtUserGit.setError("User not found");
+        Helper.showToast(mContext, "User not found. Please try again");
+        edtUserGit.setText(Helper.Constant.EMPTY_STRING);
+        edtUserGit.requestFocus();
     }
 
     public void showLoading(boolean loading) {

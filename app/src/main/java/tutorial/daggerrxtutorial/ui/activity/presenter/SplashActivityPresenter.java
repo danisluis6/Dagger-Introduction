@@ -2,6 +2,10 @@ package tutorial.daggerrxtutorial.ui.activity.presenter;
 
 import android.util.Log;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
+
+import rx.functions.Action1;
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
 import tutorial.daggerrxtutorial.data.api.UserManager;
 import tutorial.daggerrxtutorial.data.model.User;
@@ -63,7 +67,6 @@ public class SplashActivityPresenter {
     }
 
     public void onShowRepositoriesClick() {
-        Log.i("mUserName", mUserName);
         if (mValidator.validUsername(mUserName)) {
             mSplashActivity.showLoading(true);
             mUserManager.getUser(mUserName).subscribe(new SimpleObserver<User>() {
