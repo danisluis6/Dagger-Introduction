@@ -1,7 +1,7 @@
-package tutorial.daggerrxtutorial.ui.activity.presenter;
+package tutorial.daggerrxtutorial.ui.activity.splash.presenter;
 
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
-import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
+import tutorial.daggerrxtutorial.ui.activity.splash.SplashActivity;
 import tutorial.daggerrxtutorial.utils.Validator;
 
 /**

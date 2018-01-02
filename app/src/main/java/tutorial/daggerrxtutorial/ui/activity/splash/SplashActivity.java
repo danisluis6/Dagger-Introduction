@@ -1,4 +1,4 @@
-package tutorial.daggerrxtutorial.ui.activity;
+package tutorial.daggerrxtutorial.ui.activity.splash;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -18,8 +18,9 @@ import rx.Subscription;
 import rx.functions.Action1;
 import tutorial.daggerrxtutorial.application.Application;
 import tutorial.daggerrxtutorial.R;
-import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
-import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
+import tutorial.daggerrxtutorial.ui.activity.BaseActivity;
+import tutorial.daggerrxtutorial.ui.activity.splash.module.SplashActivityModule;
+import tutorial.daggerrxtutorial.ui.activity.splash.presenter.SplashActivityPresenter;
 import tutorial.daggerrxtutorial.utils.AnalyticsManager;
 
 /**

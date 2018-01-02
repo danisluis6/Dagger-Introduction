@@ -1,9 +1,9 @@
-package tutorial.daggerrxtutorial.ui.activity.component;
+package tutorial.daggerrxtutorial.ui.activity.splash.component;
 
 import dagger.Subcomponent;
 import tutorial.daggerrxtutorial.ui.activity.ActivityScope;
-import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
-import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
+import tutorial.daggerrxtutorial.ui.activity.splash.SplashActivity;
+import tutorial.daggerrxtutorial.ui.activity.splash.module.SplashActivityModule;
 
 /**
  * Created by lorence on 28/12/2017.

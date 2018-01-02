@@ -2,7 +2,6 @@ package tutorial.daggerrxtutorial.data.api;
 
 import android.app.Application;
 import android.support.compat.BuildConfig;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,12 +57,6 @@ public class GithubApiModule {
     @Singleton
     public GithubApiService provideGithubApiService(Retrofit restAdapter) {
         return restAdapter.create(GithubApiService.class);
-    }
-
-    @Provides
-    @Singleton
-    public UserManager provideUserManager(GithubApiService githubApiService) {
-        return new UserManager(githubApiService);
     }
 
 }
