@@ -3,6 +3,7 @@ package tutorial.daggerrxtutorial.ui.activity.module;
 import dagger.Module;
 import dagger.Provides;
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
+import tutorial.daggerrxtutorial.data.api.UserManager;
 import tutorial.daggerrxtutorial.ui.activity.ActivityScope;
 import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
 import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
@@ -32,8 +33,8 @@ public class SplashActivityModule {
 
     @Provides
     @ActivityScope
-    SplashActivityPresenter provideSplashActivityPresenter(Validator validator, HeavyLibraryWrapper heavyLibraryWrapper) {
-        return new SplashActivityPresenter(splashActivity, validator, heavyLibraryWrapper);
+    SplashActivityPresenter provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
+        return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
     }
 
     /** Another way, if you don't want to push parameters. You can use @Inject in here

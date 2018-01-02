@@ -1,6 +1,9 @@
 package tutorial.daggerrxtutorial.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -10,14 +13,17 @@ import android.widget.Toast;
 import com.jakewharton.rxbinding.widget.RxTextView;
 import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscription;
 import rx.functions.Action1;
-import tutorial.daggerrxtutorial.application.Application;
 import tutorial.daggerrxtutorial.R;
+import tutorial.daggerrxtutorial.application.Application;
 import tutorial.daggerrxtutorial.ui.activity.module.SplashActivityModule;
 import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
 import tutorial.daggerrxtutorial.utils.AnalyticsManager;
@@ -51,6 +57,8 @@ public class SplashActivity extends BaseActivity {
     protected AnalyticsManager mAnalyticsManager;
     @Inject
     protected SplashActivityPresenter mPresenter;
+    @Inject
+    protected Context mContext;
 
     private Subscription textChangeSubscription;
 
@@ -70,13 +78,38 @@ public class SplashActivity extends BaseActivity {
                         @Override
                         public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
                             mPresenter.mUserName = textViewTextChangeEvent.text().toString();
-                            Toast.makeText(SplashActivity.this, mPresenter.mUserName, Toast.LENGTH_LONG);
+                            edtUserGit.setError(null);
                         }
                     });
                 }
                 return false;
             }
         });
+
+        edtUserGit.addTextChangedListener(
+                new TextWatcher() {
+                    @Override public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+                    private Timer timer=new Timer();
+                    private final long DELAY = 500; // milliseconds
+
+                    @Override
+                    public void afterTextChanged(final Editable s) {
+                        timer.cancel();
+                        timer = new Timer();
+                        timer.schedule(
+                                new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, "Search", Toast.LENGTH_SHORT).show();
+                                    }
+                                },
+                                DELAY
+                        );
+                    }
+                }
+        );
     }
 
     @Override
@@ -87,4 +120,29 @@ public class SplashActivity extends BaseActivity {
                 .inject(this);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        textChangeSubscription.unsubscribe();
+    }
+
+//    @OnClick(R.id.btnShowRepositories)
+//    public void onShowRepositoriesClick() {
+//        mPresenter.onShowRepositoriesClick();
+//    }
+//
+//    public void showRepositoriesListForUser(User user) {
+////        Application.get(this).createUserComponent(user);
+////        startActivity(new Intent(this, RepositoriesListActivity.class));
+//    }
+//
+//    public void showValidationError() {
+//        edtUserGit.setError("Validation error");
+//    }
+//
+//    public void showLoading(boolean loading) {
+//        btnShowRepositories.setVisibility(loading ? View.GONE : View.VISIBLE);
+//        pbLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
+//    }
 }
