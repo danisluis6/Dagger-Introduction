@@ -1,7 +1,5 @@
 package tutorial.daggerrxtutorial.ui.activity.presenter;
 
-import android.os.UserManager;
-
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
 import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
 import tutorial.daggerrxtutorial.utils.Validator;
