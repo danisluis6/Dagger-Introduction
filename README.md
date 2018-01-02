@@ -1,5 +1,5 @@
 # Let do it as soon as possible.
-> **Explain about Using GithubApiModule**
+> **Explain about Using UserManager**
  
      @Component(modules = {
              ApplicationModule.class,
@@ -60,5 +60,41 @@ Constructor to call UserManager or Using UserManager(@Inject) from GithubApiModu
                             .observeOn(AndroidSchedulers.mainThread());
                 }
                 
+> **Explain about Using SplashActivityPresenter**
+
+  - Create Constructor(Instead of using @Inject, we can use argument in Constructor)
+    - List all of @Inject that you want to get from Activity
+    
+            public class SplashActivityPresenter {
+                public String username;
+                private SplashActivity splashActivity;
+                private Validator validator;
+                private UserManager userManager;
+                private HeavyLibraryWrapper heavyLibraryWrapper;
             
+                public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
+                                               UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
+                    this.splashActivity = splashActivity;
+                    this.validator = validator;
+                    this.userManager = userManager;
+                    this.heavyLibraryWrapper = heavyLibraryWrapper;
+            
+                    //This calls should be delivered to ExternalLibrary right after it will be initialized
+                    this.heavyLibraryWrapper.callMethod();
+                    this.heavyLibraryWrapper.callMethod();
+                    this.heavyLibraryWrapper.callMethod();
+                    this.heavyLibraryWrapper.callMethod();
+                }
+            }
+   
+            @Module
+            public class SplashActivityModule {
+                @Provides
+                @ActivityScope
+                SplashActivityPresenter provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
+                    return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
+                }
+            }  
+            
+  - After we will definite some methods in SplashActivityPresenter to execute your business.
             

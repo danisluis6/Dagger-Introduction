@@ -59,4 +59,10 @@ public class GithubApiModule {
         return restAdapter.create(GithubApiService.class);
     }
 
+    @Provides
+    @Singleton
+    public UserManager provideUserManager(GithubApiService githubApiService) {
+        return new UserManager(githubApiService);
+    }
+
 }
