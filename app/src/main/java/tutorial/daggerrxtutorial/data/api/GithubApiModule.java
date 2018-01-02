@@ -2,7 +2,6 @@ package tutorial.daggerrxtutorial.data.api;
 
 import android.app.Application;
 import android.support.compat.BuildConfig;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,7 +1,8 @@
-package tutorial.daggerrxtutorial.ui.activity.presenter;
+package tutorial.daggerrxtutorial.ui.activity.splash.presenter;
 
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
-import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
+import tutorial.daggerrxtutorial.data.api.UserManager;
+import tutorial.daggerrxtutorial.ui.activity.splash.SplashActivity;
 import tutorial.daggerrxtutorial.utils.Validator;
 
 /**
@@ -40,12 +41,27 @@ public class SplashActivityPresenter {
 
     private SplashActivity mSplashActivity;
     private Validator mValidator;
+    private UserManager mUserManager;
     private HeavyLibraryWrapper mHeavyLibraryWrapper;
 
+//    public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
+//                                   HeavyLibraryWrapper heavyLibraryWrapper) {
+//        this.mSplashActivity = splashActivity;
+//        this.mValidator = validator;
+//        this.mHeavyLibraryWrapper = heavyLibraryWrapper;
+//
+//        //This calls should be delivered to ExternalLibrary right after it will be initialized
+//        this.mHeavyLibraryWrapper.callMethod();
+//        this.mHeavyLibraryWrapper.callMethod();
+//        this.mHeavyLibraryWrapper.callMethod();
+//        this.mHeavyLibraryWrapper.callMethod();
+//    }
+
     public SplashActivityPresenter(SplashActivity splashActivity, Validator validator,
-                                   HeavyLibraryWrapper heavyLibraryWrapper) {
+                                   UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
         this.mSplashActivity = splashActivity;
         this.mValidator = validator;
+        this.mUserManager = userManager;
         this.mHeavyLibraryWrapper = heavyLibraryWrapper;
 
         //This calls should be delivered to ExternalLibrary right after it will be initialized

@@ -1,11 +1,12 @@
-package tutorial.daggerrxtutorial.ui.activity.module;
+package tutorial.daggerrxtutorial.ui.activity.splash.module;
 
 import dagger.Module;
 import dagger.Provides;
 import tutorial.daggerrxtutorial.HeavyLibraryWrapper;
+import tutorial.daggerrxtutorial.data.api.UserManager;
 import tutorial.daggerrxtutorial.ui.activity.ActivityScope;
-import tutorial.daggerrxtutorial.ui.activity.SplashActivity;
-import tutorial.daggerrxtutorial.ui.activity.presenter.SplashActivityPresenter;
+import tutorial.daggerrxtutorial.ui.activity.splash.SplashActivity;
+import tutorial.daggerrxtutorial.ui.activity.splash.presenter.SplashActivityPresenter;
 import tutorial.daggerrxtutorial.utils.Validator;
 
 /**
@@ -30,10 +31,16 @@ public class SplashActivityModule {
         return splashActivity;
     }
 
+//    @Provides
+//    @ActivityScope
+//    SplashActivityPresenter provideSplashActivityPresenter(Validator validator, HeavyLibraryWrapper heavyLibraryWrapper) {
+//        return new SplashActivityPresenter(splashActivity, validator, heavyLibraryWrapper);
+//    }
+
     @Provides
     @ActivityScope
-    SplashActivityPresenter provideSplashActivityPresenter(Validator validator, HeavyLibraryWrapper heavyLibraryWrapper) {
-        return new SplashActivityPresenter(splashActivity, validator, heavyLibraryWrapper);
+    SplashActivityPresenter provideSplashActivityPresenter(Validator validator, UserManager userManager, HeavyLibraryWrapper heavyLibraryWrapper) {
+        return new SplashActivityPresenter(splashActivity, validator, userManager, heavyLibraryWrapper);
     }
 
     /** Another way, if you don't want to push parameters. You can use @Inject in here
@@ -45,6 +52,5 @@ public class SplashActivityModule {
      * @Inject HeavyLibraryWrapper  mLibraryWrapper;
      * Inside module new Object() or get it from other Module or Component (Using @Provides)
      * +> Go to GithubApiModule
-     * */
-
+     */
 }

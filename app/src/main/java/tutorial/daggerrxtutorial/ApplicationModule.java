@@ -1,8 +1,8 @@
 package tutorial.daggerrxtutorial;
 
 import android.app.Application;
+import android.content.Context;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -21,9 +21,11 @@ import tutorial.daggerrxtutorial.utils.Validator;
 public class ApplicationModule {
 
     private Application application;
+    private Context mContext;
 
-    public ApplicationModule(Application application) {
+    public ApplicationModule(Application application, Context context) {
         this.application = application;
+        this.mContext = context;
     }
 
     @Provides
@@ -56,6 +58,12 @@ public class ApplicationModule {
     @Singleton
     HeavyLibraryWrapper provideLibraryWrapper() {
         return new HeavyLibraryWrapper();
+    }
+
+    @Provides
+    @Singleton
+    Context provideContext() {
+        return mContext;
     }
 
 }

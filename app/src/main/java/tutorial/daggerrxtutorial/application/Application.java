@@ -38,7 +38,7 @@ public class Application extends android.app.Application {
 
     private void initAppComponent() {
         applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
+                .applicationModule(new ApplicationModule(this, this))
                 .build();
     }
 
