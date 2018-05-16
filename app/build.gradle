@@ -1,64 +1,93 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.frogermcs.androiddevmetrics'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
-    useLibrary 'org.apache.http.legacy'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "frogermcs.io.githubclient"
-        minSdkVersion 15
-        targetSdkVersion 25
+        applicationId "com.mirhoseini.fyber"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
 
-        testInstrumentationRunner 'frogermcs.io.githubclient.MyTestRunner'
+        /* replace with custom MockTestRunner */
+        // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.mirhoseini.fyber.test.dagger.MockFyberTestRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    /* allow using java 8 lambda */
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /* fixes espresso conflict with supportAnnotation and androidSupport new versions */
+    configurations.all {
+        resolutionStrategy {
+            force rootProject.ext.testLibraries.supportAnnotations
+            force rootProject.ext.libraries.androidSupport
+            force rootProject.ext.libraries.appCompat
+            force rootProject.ext.libraries.designSupport
+            force rootProject.ext.libraries.recyclerView
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile project(':fyber-core')
 
-    //Dagger 2
-    compile 'com.google.dagger:dagger:2.7'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'com.google.auto.factory:auto-factory:1.0-beta3'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile rootProject.ext.testLibraries.junit
+    testCompile rootProject.ext.testLibraries.robolectric
 
-    compile 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.jakewharton.timber:timber:4.3.1'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.2.1'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    compile 'com.google.guava:guava:19.0'
+    androidTestCompile rootProject.ext.testLibraries.mockito
+    androidTestCompile rootProject.ext.testLibraries.dexmaker
+    androidTestCompile rootProject.ext.testLibraries.dexmakerMockito
+    androidTestCompile rootProject.ext.testLibraries.supportTestRunner
+    androidTestCompile rootProject.ext.testLibraries.supportAnnotations
+    androidTestCompile rootProject.ext.testLibraries.espresso
+    androidTestCompile rootProject.ext.testLibraries.espressoContrib
 
-    testCompile "org.robolectric:robolectric:3.1.2"
-    testCompile "org.mockito:mockito-core:1.10.19"
+    compile rootProject.ext.libraries.appCompat
+    compile rootProject.ext.libraries.androidSupport
+    compile rootProject.ext.libraries.designSupport
+    compile rootProject.ext.libraries.vectorSupport
+    compile rootProject.ext.libraries.recyclerView
+    compile rootProject.ext.libraries.cardView
+    compile rootProject.ext.libraries.palette
 
-    androidTestCompile 'com.android.support:support-annotations:25.0.0'
-    androidTestCompile 'com.squareup:javawriter:2.5.1'
+    compile rootProject.ext.libraries.gmsAds
 
-    androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile "org.mockito:mockito-core:1.10.19"
-    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
-    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
+    compile rootProject.ext.libraries.rxandroid
+    compile rootProject.ext.libraries.rxbinding
+
+    compile rootProject.ext.libraries.utils
+    compile rootProject.ext.libraries.appSettings
+
+    compile rootProject.ext.libraries.picasso
+
+    compile rootProject.ext.libraries.butterknife
+    apt rootProject.ext.aptLibraries.butterknifeCompiler
+
+    compile rootProject.ext.libraries.dagger
+    apt rootProject.ext.aptLibraries.daggerCompiler
+    androidTestApt rootProject.ext.aptLibraries.daggerCompiler
+
+    compile rootProject.ext.libraries.timber
+
 }
